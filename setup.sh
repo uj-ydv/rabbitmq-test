@@ -8,6 +8,10 @@ rpm --import https://packagecloud.io/rabbitmq/erlang/gpgkey
 
 rpm --import https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey
 
+yum install wget
+
+wget https://raw.githubusercontent.com/uj-ydv/rabbitmq-test/main/rabbitmq.repo
+
 cat rabbitmq.repo > /etc/yum.repos.d/rabbitmq.repo
 
 mkdir -p /var/lib/rabbitmq
