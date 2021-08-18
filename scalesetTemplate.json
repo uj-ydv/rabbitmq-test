@@ -18,7 +18,7 @@
     },
     "vmssName": {
       "type": "string",
-      "defaultValue": "ujjwalvm",
+      "defaultValue": "rabbitvm",
       "metadata": {
         "description": "String used as a base for naming resources (9 characters or less). A hash is prepended to this string for some resources, and resource-specific information is appended."
       }
@@ -239,6 +239,12 @@
                       "properties": {
                         "subnet": {
                           "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]"
+                        },
+                        "publicipaddressconfiguration": {
+                          "name": "pub1",
+                          "properties": {
+                            "idleTimeoutInMinutes": 15
+                          }
                         },
                         "loadBalancerBackendAddressPools": [
                           {
