@@ -11,7 +11,7 @@
       },
       "vmSku": {
         "type": "string",
-        "defaultValue": "Standard_D2s_v3",
+        "defaultValue": "Standard_D1_v2",
         "metadata": {
           "description": "Size of VMs in the VM Scale Set."
         }
@@ -55,6 +55,20 @@
         "defaultValue": "password@123",
         "metadata": {
           "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+        }
+      },
+      "_artifactsLocation": {
+        "type": "string",
+        "defaultValue": "[deployment().properties.templatelink.uri]",
+        "metadata": {
+          "description": "The base URI where artifacts required by this template are located"
+        }
+      },
+      "_artifactsLocationSasToken": {
+        "type": "securestring",
+        "defaultValue": "",
+        "metadata": {
+          "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated"
         }
       }
     },
@@ -320,6 +334,26 @@
                   }
                 }
               ]
+            },
+            "extensionProfile": {
+              "extensions": [
+                {
+                  "name": "lapextension",
+                  "properties": {
+                    "publisher": "Microsoft.Azure.Extensions",
+                    "type": "CustomScript",
+                    "typeHandlerVersion": "2.0",
+                    "autoUpgradeMinorVersion": true,
+                    "settings": {
+                      "fileUris": [
+                        "[uri(parameters('_artifactsLocation'), concat('setup.sh', parameters('_artifactsLocationSasToken')))]",
+                        "[uri(parameters('_artifactsLocation'), concat('rabbitmq.repo', parameters('_artifactsLocationSasToken')))]"
+                      ],
+                      "commandToExecute": "sudo bash installserver.sh"
+                    }
+                  }
+                }
+              ]
             }
           }
         }
@@ -388,7 +422,3 @@
       }
     ]
   }
-
-
-
-
