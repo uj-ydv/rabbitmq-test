@@ -259,7 +259,7 @@
               "properties": {
                 "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
-                  "id": "[variables('publicIPAddressName')]"
+                  "id": "[variables('publicIPAddressID')]"
                 },
                 "subnet": {
                   "id": "[variables('subnetId')]"
