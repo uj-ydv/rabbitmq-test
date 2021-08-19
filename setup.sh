@@ -41,3 +41,5 @@ echo "loopback_users.guest = false\ntotal_memory_available_override_value = 2147
 rabbitmq-plugins enable rabbitmq_management rabbitmq_federation rabbitmq_federation_management
 
 service rabbitmq-server start
+
+#echo "listeners.ssl.default = 5671\nssl_options.cacertfile = /etc/rabbitmq-tls/ca_certificate.pem\nssl_options.certfile = /etc/rabbitmq-tls/server_certificate.pem\nssl_options.keyfile = /etc/rabbitmq-tls/server_key.pemssl_options.verify = verify_peer\nssl_options.fail_if_no_peer_cert = true
